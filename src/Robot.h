@@ -15,4 +15,9 @@ public:
     LeftM.spinFor(turn, deg, velocity, vu, 0);
     RightM.spinFor(turn, deg, velocity, vu);
   }
+  
+   void ResetArm() {
+    ArmM.setMaxTorque(1,Nm);
+    //ArmM.setPosition(0,cm);
+  }
 };

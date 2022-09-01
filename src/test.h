@@ -6,15 +6,19 @@ class RobotTest {
 public:
   void PrintMotorRot(motor m) {
     while (1) {
-      float distance = m.position(degrees);
-      PrintAndWait(distance);
+      PrintAndWait(m.position(degrees));
     }
   }
   
   void PrintSonar(sonar s) {
     while (1) {
-      double distance = s.distance(distanceUnits::cm);
-      PrintAndWait(distance);
+      PrintAndWait(s.distance(distanceUnits::cm));
+    }
+  }
+  
+  void PrintBumber(bumper b) {
+    while (1) {
+      PrintAndWait(b.pressing());
     }
   }
 
