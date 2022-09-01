@@ -1,3 +1,19 @@
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// ArmM                 motor         11              
+// LeftM                motor         1               
+// RightM               motor         10              
+// Range1               sonar         A, B            
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// ArmM                 motor         11              
+// LeftM                motor         1               
+// RightM               motor         10              
+// RangeFinderA         sonar         A, B            
+// ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */

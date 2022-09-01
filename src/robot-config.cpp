@@ -11,6 +11,7 @@ brain  Brain;
 motor ArmM = motor(PORT11, ratio18_1, false);
 motor LeftM = motor(PORT1, ratio18_1, true);
 motor RightM = motor(PORT10, ratio18_1, false);
+sonar Range1 = sonar(Brain.ThreeWirePort.A);
 
 // VEXcode generated functions
 
