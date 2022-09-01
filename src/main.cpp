@@ -5,6 +5,33 @@
 // LeftM                motor         1               
 // RightM               motor         10              
 // Sonar1               sonar         A, B            
+// Bumper1              bumper        C               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// ArmM                 motor         11              
+// LeftM                motor         1               
+// RightM               motor         10              
+// Range1               sonar         A, B            
+// Bumper1              bumper        C               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// ArmM                 motor         11              
+// LeftM                motor         1               
+// RightM               motor         10              
+// Range1               sonar         A, B            
+// BumperC              bumper        C               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// ArmM                 motor         11              
+// LeftM                motor         1               
+// RightM               motor         10              
+// Sonar1               sonar         A, B            
 // ---- END VEXCODE CONFIGURED DEVICES ----
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
@@ -46,6 +73,7 @@
 #include <iostream>
 
 int main() {
+motor Arm = motor(PORT11, ratio18_1, false);
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
 
@@ -72,9 +100,9 @@ int main() {
   // RightM.spinFor(5000, deg, 360, dps);
   // vex::task::sleep(1000);
 
-  robot.ForwardBlock(100000000);
-  while (LeftM.isSpinning()) {
-    std::cout << LeftM.velocity(rpm) << '\t' << LeftM.power(watt) << std::endl;
-    task::sleep(100);
-  }
+  // robot.ForwardBlock(100000000);
+  // while (LeftM.isSpinning()) {
+  //   std::cout << LeftM.velocity(rpm) << '\t' << LeftM.power(watt) << std::endl;
+  //   task::sleep(100);
+  // }
 }

@@ -12,6 +12,7 @@ motor ArmM = motor(PORT11, ratio18_1, false);
 motor LeftM = motor(PORT1, ratio18_1, true);
 motor RightM = motor(PORT10, ratio18_1, false);
 sonar Sonar1 = sonar(Brain.ThreeWirePort.A);
+bumper Bumper1 = bumper(Brain.ThreeWirePort.C);
 
 // VEXcode generated functions
 
