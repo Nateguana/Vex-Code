@@ -68,7 +68,7 @@
 #define dist(a) vex::distanceUnits::cm
 
 #include "Robot.h"
-#include "Testing.h"
+#include "Test.h"
 #include "vex.h"
 #include <iostream>
 
