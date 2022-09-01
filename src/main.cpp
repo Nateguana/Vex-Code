@@ -4,6 +4,14 @@
 // ArmM                 motor         11              
 // LeftM                motor         1               
 // RightM               motor         10              
+// Sonar1               sonar         A, B            
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// ArmM                 motor         11              
+// LeftM                motor         1               
+// RightM               motor         10              
 // Range1               sonar         A, B            
 // ---- END VEXCODE CONFIGURED DEVICES ----
 // ---- START VEXCODE CONFIGURED DEVICES ----
@@ -33,16 +41,22 @@
 #define dist(a) vex::distanceUnits::cm
 
 #include "Robot.h"
+#include "Testing.h"
 #include "vex.h"
 #include <iostream>
 
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
-  Robot robot(10.5, dist(cm));
   vexcodeInit();
+
+  Robot robot;//(10.5);
+  RobotTest rTest;
+
   Brain.Screen.print("Hello, World!");
   Brain.Screen.newLine();
-  robot.ForwardBlock(12);
+  std::cout << "Hello, World!" << std::endl;
+  //robot.ForwardBlock(12);
+  rTest.PrintSonar(Sonar1);
   // vex::task::sleep(1000);
   // obot.ForwardBlock(-2);
   // robot.PrintMotorRot(LeftM);
