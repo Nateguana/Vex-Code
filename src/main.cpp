@@ -81,7 +81,11 @@ int main() {
   Brain.Screen.newLine();
   std::cout << "Hello, World!" << std::endl;
     
-  rTest.PrintBumber(Bumper1);
+  rTest.PrintSonar(Sonar);
+  // while(!Bumper1.pressing())
+  //   vex::task::sleep(100);
+  // robot.ForwardBlock(12);
+}
   //robot.ForwardBlock(12);
   //rTest.PrintSonar(Sonar1);
   // vex::task::sleep(1000);
@@ -104,4 +108,3 @@ int main() {
   //   std::cout << LeftM.velocity(rpm) << '\t' << LeftM.power(watt) << std::endl;
   //   task::sleep(100);
   // }
-}
