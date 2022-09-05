@@ -13,6 +13,10 @@ motor LeftM = motor(PORT1, ratio18_1, true);
 motor RightM = motor(PORT10, ratio18_1, false);
 sonar Sonar = sonar(Brain.ThreeWirePort.A);
 bumper Bumper = bumper(Brain.ThreeWirePort.C);
+line Line = line(Brain.ThreeWirePort.D);
+/*vex-vision-config:begin*/
+vision Vision = vision (PORT2, 50);
+/*vex-vision-config:end*/
 
 // VEXcode generated functions
 

@@ -1,7 +1,6 @@
 # VEXcode makefile 2019_03_26_01
 
 # show compiler output
-
 #asdasda
 VERBOSE = 0
 
@@ -25,6 +24,7 @@ SRC_A  = makefile
 
 # project header file locations
 INC_F  = include
+
 
 # build targets
 all: $(BUILD)/$(PROJECT).bin
