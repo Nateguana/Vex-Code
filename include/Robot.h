@@ -2,6 +2,7 @@
 #include "vex.h"
 #include <cmath>
 #include <iostream>
+#include <algorithm>
 
 class Robot {
   double track = 29;

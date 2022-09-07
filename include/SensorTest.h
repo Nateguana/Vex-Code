@@ -28,7 +28,7 @@ public:
   
   static void PrintLine(line l,  unsigned num = ~0) {
     for (unsigned j = 0; j < num; j++) {
-      PrintAndWait(l.reflectivity());
+      PrintAndWait(l.value(range8bit));
     }
   }
 
