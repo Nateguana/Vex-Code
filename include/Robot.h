@@ -48,7 +48,10 @@ public:
     }
      vex::task::sleep(500);
   }
-
+template <typename T>
+void Print(T c);
+template <typename T>
+void Println(T c);
 private:
   double GetTurn(double angle);
 };
