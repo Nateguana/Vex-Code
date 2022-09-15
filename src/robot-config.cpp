@@ -15,6 +15,12 @@ sonar Sonar = sonar(Brain.ThreeWirePort.A);
 bumper Bumper = bumper(Brain.ThreeWirePort.C);
 line LineL = line(Brain.ThreeWirePort.D);
 line LineR = line(Brain.ThreeWirePort.E);
+/*vex-vision-config:begin*/
+signature Vision__YELL = signature (1, 1643, 2325, 1984, -3605, -3203, -3404, 2.5, 0);
+signature Vision__BLU = signature (2, -1237, -745, -991, 5405, 7143, 6274, 2.5, 0);
+signature Vision__RE = signature (3, 7163, 8427, 7795, -481, -181, -331, 4.8, 0);
+vision Vision = vision (PORT2, 50, Vision__YELL, Vision__BLU, Vision__RE);
+/*vex-vision-config:end*/
 
 // VEXcode generated functions
 

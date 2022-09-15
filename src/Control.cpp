@@ -28,7 +28,7 @@ void Control::WallFollow(double cm, double range, double cutoff, double k,
   // true = left
   bool dir = 1;
   bool first = 0;
- // double average = cm;
+  // double average = cm;
   while (1) {
     double dist = Sonar.distance(distanceUnits::cm);
     double error = cm - dist;
@@ -40,7 +40,7 @@ void Control::WallFollow(double cm, double range, double cutoff, double k,
       dir = !dir;
       first = 1;
     }
-    //average = dist / 10.0 + average * 9 / 10.0;
+    // average = dist / 10.0 + average * 9 / 10.0;
 
     // std::cout << "Dir: " << (dir?"left":"right") << std::endl;
     Brain.Screen.print("Dir: ");
@@ -48,7 +48,23 @@ void Control::WallFollow(double cm, double range, double cutoff, double k,
     Brain.Screen.print(" Dist: ");
     Brain.Screen.print(dist);
     Brain.Screen.newLine();
-    LeftM.spin(forward, velocity + velocity * k *(dir * -2 + 1), rpm);
+    LeftM.spin(forward, velocity + velocity * k * (dir * -2 + 1), rpm);
     RightM.spin(forward, velocity - velocity * k * (dir * -2 + 1), rpm);
+  }
+}
+
+void Control::VisionStandoff(signature &s, double fk, double sk,
+                             double velocity) {
+  while (1) {
+    Vision.takeSnapshot(s);
+    double fError,sError;
+    if(Vision.objectCount>0){
+     fError = 30 - Vision.largestObject.width;
+     sError = 320 / 2 - Vision.largestObject.centerX;
+    }else{
+      fError= sError=0;   
+    }
+    LeftM.spin(forward, velocity + velocity * fError * fk, rpm);
+    RightM.spin(forward, velocity + velocity * fError * fk, rpm);
   }
 }
