@@ -60,11 +60,16 @@ void Control::VisionStandoff(signature &s, double fk, double sk,
     double fError,sError;
     if(Vision.objectCount>0){
      fError = 30 - Vision.largestObject.width;
-     sError = 320 / 2 - Vision.largestObject.centerX;
+
+     //camra is left is 0, right is 320
+
+     //left is negative, right is posative
+     sError = Vision.largestObject.centerX - 320 / 2;
+
     }else{
       fError= sError=0;   
     }
-    LeftM.spin(forward, velocity + velocity * fError * fk, rpm);
-    RightM.spin(forward, velocity + velocity * fError * fk, rpm);
+    LeftM.spin(forward, velocity + (velocity * fError * fk)+(velocity * sError * sk), rpm);
+    RightM.spin(forward, velocity + (velocity * fError * fk)-(velocity * sError * sk), rpm);
   }
 }
