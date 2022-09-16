@@ -21,10 +21,11 @@ signature Vision__BLU = signature (2, -1237, -745, -991, 5405, 7143, 6274, 2.5, 
 signature Vision__RE = signature (3, 7163, 8427, 7795, -481, -181, -331, 4.8, 0);
 vision Vision = vision (PORT2, 50, Vision__YELL, Vision__BLU, Vision__RE);
 /*vex-vision-config:end*/
+controller Controller1 = controller(primary);
 
 // VEXcode generated functions
-
-
+// define variable for remote controller enable/disable
+bool RemoteControlCodeEnabled = true;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.

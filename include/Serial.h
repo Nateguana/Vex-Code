@@ -13,35 +13,51 @@ class Serial {
   friend Serial2;
 
 private:
-  std::stringstream ss;
-  unsigned long last = 0;
-  bool brain = true;
+  bool printToBrain = true;
+  bool printToController = false;
+  controller *con = 0;
   unsigned flushMillis = 250;
+
+  std::stringstream ss;
+
+  unsigned long last = 0;
+
   template <typename T> void Add(T val) {
     ss << val;
-    if (brain)
+    if (printToBrain)
       Brain.Screen.print(val);
+    if (printToController && con)
+      con->Screen.print(val);
   }
+  
   void NewLine() {
     ss << "\n";
-    if (brain)
+    if (printToBrain)
       Brain.Screen.newLine();
+    if (printToController && con)
+      con->Screen.newLine();
   }
 
 public:
-  void PrintToBrain(bool b) { brain = b; }
+  void PrintToBrain(bool b) { printToBrain = b; }
+  void PrintToContorller(bool b) { printToController = b; }
+  void SetController(controller *con) { this->con = con; }
   void FlushTime(unsigned millis) { flushMillis = millis; }
 
-  void operator<<(endl) = delete;
-
-  template <typename T> Serial2 &operator<<(T val) {
-    ss << val;
+  void Update() {
     unsigned long now = Brain.timer(sec);
     if (last - now > flushMillis) {
       last = now;
       std::cout << ss;
       ss.str("");
     }
+  }
+
+  //void operator<<(endl) = delete;
+
+  template <typename T> Serial2 &operator<<(T val) {
+    Add(val);
+    Update();
     return *serial2;
   }
 };
