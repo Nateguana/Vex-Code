@@ -20,7 +20,6 @@ int mains(int version) {
   //Serial << "asd" << "asdf";// << std::endl;
   //Serial << std::endl;
 
-  // con.WallFollow(40,5,40*4,1/2.0,360);
   // con.LineFollow(150,5/1000.0,180);
   // robot.Forward(100,360);
   // SensorTest::DetectObject(Vision,Vision__BLU);
