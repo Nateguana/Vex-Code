@@ -117,13 +117,3 @@ void Robot::Move(double turnL, double turnR, double velocity, bool blocking) {
     RightM.stop();
   }
 }
-
-template <typename T>
-void Robot::Print(T c) {
-
-}
-
-template <typename T>
-void Robot::Println(T c) {
-
-}

@@ -70,7 +70,7 @@ public:
     Serial.NewLine();
     return *this;
   }
-  template <typename T> Serial2 &operator<<(T val) { Serial.Add(val); }
+  template <typename T> Serial2 &operator<<(T val) { Serial.Add(val); return *this; }
 };
 static Serial2 s;
 static Serial2 *serial2 = &s;

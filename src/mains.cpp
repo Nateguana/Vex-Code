@@ -17,7 +17,7 @@ int mains(int version) {
   RightM.setMaxTorque(10000, amp);
   // std::cout << "Robot Version " << version << std::endl;
   Serial << "Robot Version " << version << std::endl;
-  Serial << "asd" << std::endl;
+  //Serial << "asd" << "asdf";// << std::endl;
   //Serial << std::endl;
 
   // con.WallFollow(40,5,40*4,1/2.0,360);

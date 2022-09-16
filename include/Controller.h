@@ -1,16 +1,4 @@
 #include "vex.h"
-//#include <cstddef>
-typedef controller::axis (*Axis)();
-
-// template<typename T, typename U> constexpr size_t offsetOf(U T::*member)
-// {
-//     return (char*)&((T*)nullptr->*member) - (char*)nullptr;
-// }
-
-// template<typename T, typename U> constexpr size_t getFromOffset()
-// {
-//     return
-// }
 
 class Joy {
 private:
