@@ -1,4 +1,5 @@
 #include "Control.h"
+#include "Serial.h"
 void Control::LineFollow(uint8_t cutoff, double k, double velocity) {
   // bool intersection = 0;
   while (1) {
@@ -60,16 +61,22 @@ void Control::VisionStandoff(signature &s, double fk, double sk,
     double fError,sError;
     if(Vision.objectCount>0){
      fError = 30 - Vision.largestObject.width;
-
      //camra is left is 0, right is 320
 
      //left is negative, right is posative
      sError = Vision.largestObject.centerX - 320 / 2;
 
     }else{
-      fError= sError=0;   
+      fError= 0;
+      sError=0;  
     }
-    LeftM.spin(forward, velocity + (velocity * fError * fk)+(velocity * sError * sk), rpm);
-    RightM.spin(forward, velocity + (velocity * fError * fk)-(velocity * sError * sk), rpm);
+    Serial << "fError: "<< fError << " sError: "<< sError << std::endl;
+    /*if(fabs(fError)<10){
+          fError=0;   
+    }*/
+    
+    LeftM.spin(forward, velocity * fError * fk-velocity * sError * sk, rpm);
+    RightM.spin(forward, velocity * fError * fk+velocity * sError * sk, rpm);
+    vex::task::sleep(100);
   }
 }

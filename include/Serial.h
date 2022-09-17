@@ -21,6 +21,7 @@ private:
   std::stringstream ss;
 
   unsigned long last = 0;
+  unsigned long num = 0;
 
   template <typename T> void Add(T val) {
     ss << val;
@@ -45,10 +46,10 @@ public:
   void FlushTime(unsigned millis) { flushMillis = millis; }
 
   void Update() {
-    unsigned long now = Brain.timer(sec);
-    if (last - now > flushMillis) {
+    unsigned long now = Brain.timer(msec);
+    if ( now-last > flushMillis) {
       last = now;
-      std::cout << ss;
+      std::cout << ss.str() << std::flush;
       ss.str("");
     }
   }
