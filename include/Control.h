@@ -11,4 +11,5 @@ public:
 void Standoff(double cm,double k, double velocity=180);
 void WallFollow(double cm,double range,double cutoff, double k, double velocity=180);
 void VisionStandoff(signature& s, double fk,double sk, double velocity);
+void Teleop(double k,double velocity);
 };

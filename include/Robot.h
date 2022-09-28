@@ -1,57 +1,51 @@
 #pragma once
 #include "vex.h"
-#include <cmath>
-#include <iostream>
 #include <algorithm>
-
+#include <cmath>
+#include <iostream>//33 - 38
+static motor *Motors[5] = {&LBM, &RBM, &LFM, &RFM, &SM};
+struct Turns {
+  Turns(double turnBL, double turnBR, double turnFL, double turnFR,
+        double turnS) {
+    turns[0] = turnBL;
+    turns[1] = turnBR;
+    turns[2] = turnFL;
+    turns[3] = turnFR;
+    turns[4] = turnS;
+  }
+  double turns[5];
+};
 class Robot {
-  double track = 29;
-  double gRatio = 5;
+  double track = 0;
+  double gRatio = 0;
   double tRatio = 0;
 
 public:
-  Robot(double diameter = 10.5, double trackLength = 29, double gearRatio = 5);
+  Robot(double diameter = 10.5, double trackLength = 35, double gearRatio = 5);
 
   void Forward(double dist, double velocity = 360, bool blocking = 1);
   void Stop();
 
+  void StrafeLeft(double dist, double velocity = 360, bool blocking = 1);
+  void StrafeRight(double dist, double velocity = 360, bool blocking = 1);
+
   void TurnLeft(double angle, double velocity = 360, bool blocking = 1);
   void TurnRight(double angle, double velocity = 360, bool blocking = 1);
 
-  void TurnLeft1(double angle, double velocity = 360, bool blocking = 1);
-  void TurnRight1(double angle, double velocity = 360, bool blocking = 1);
+  void Catch(bool blocking = 1);
+  void Uncatch(bool blocking = 1);
 
-  void TurnLeftArc(double dist, double angle, double velocity = 360,
-                   bool blocking = 1);
-  void TurnRightArc(double dist, double angle, double velocity = 360,
-                    bool blocking = 1);
+  // void TurnLeft1(double angle, double velocity = 360, bool blocking = 1);
+  // void TurnRight1(double angle, double velocity = 360, bool blocking = 1);
 
-  void TurnLeftArc1(double dist, double angle, double velocity = 360,
-                   bool blocking = 1);
-
-  void TurnRightArc1(double dist, double angle, double velocity = 360,
-                    bool blocking = 1);
-
-  void Control(double dist, double error, double velocity = 360);
-  void Move(double turnL,double turnR,double velocity = 360, bool blocking=1);
-
-  void StaticArm() {
-    ArmM.setMaxTorque(.5, Nm);
-    // ArmM.setStopping((-100000, deg, 360, dps);
-    // ArmM.setPosition(0, deg);
-    ArmM.spin(reverse, 120, rpm);
-  }
+ // void Control(double dist, double error, double velocity = 360);
+  void Control(Turns &turns); 
+  void Move(Turns &turns, double velocity, bool blocking);
 
   void WaitForPress() {
     while (!Bumper.pressing()) {
       vex::task::sleep(10);
     }
-     vex::task::sleep(500);
+    vex::task::sleep(500);
   }
-template <typename T>
-void Print(T c);
-template <typename T>
-void Println(T c);
-private:
-  double GetTurn(double angle);
 };

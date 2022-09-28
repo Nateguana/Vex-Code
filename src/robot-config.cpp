@@ -8,9 +8,8 @@ using code = vision::code;
 brain  Brain;
 
 // VEXcode device constructors
-motor ArmM = motor(PORT11, ratio18_1, false);
-motor LeftM = motor(PORT1, ratio18_1, true);
-motor RightM = motor(PORT10, ratio18_1, false);
+motor LBM = motor(PORT11, ratio18_1, true);
+motor RBM = motor(PORT20, ratio18_1, false);
 sonar Sonar = sonar(Brain.ThreeWirePort.A);
 bumper Bumper = bumper(Brain.ThreeWirePort.C);
 line LineL = line(Brain.ThreeWirePort.D);
@@ -22,6 +21,14 @@ signature Vision__RE = signature (3, 7163, 8427, 7795, -481, -181, -331, 4.8, 0)
 vision Vision = vision (PORT2, 50, Vision__YELL, Vision__BLU, Vision__RE);
 /*vex-vision-config:end*/
 controller Controller1 = controller(primary);
+motor RFM = motor(PORT10, ratio18_1, false);
+motor LFM = motor(PORT1, ratio18_1, true);
+digital_out DigitalOutH = digital_out(Brain.ThreeWirePort.H);
+motor SM = motor(PORT5, ratio18_1, false);
+motor CRM = motor(PORT18, ratio18_1, true);
+motor CLM = motor(PORT19, ratio18_1, false);
+motor ConveyM = motor(PORT9, ratio18_1, true);
+motor BrushM = motor(PORT8, ratio18_1, true);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable

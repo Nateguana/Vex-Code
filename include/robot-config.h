@@ -5,9 +5,8 @@ extern brain Brain;
 using signature = vision::signature;
 
 // VEXcode devices
-extern motor ArmM;
-extern motor LeftM;
-extern motor RightM;
+extern motor LBM;
+extern motor RBM;
 extern sonar Sonar;
 extern bumper Bumper;
 extern line LineL;
@@ -21,6 +20,14 @@ extern signature Vision__SIG_6;
 extern signature Vision__SIG_7;
 extern vision Vision;
 extern controller Controller1;
+extern motor RFM;
+extern motor LFM;
+extern digital_out DigitalOutH;
+extern motor SM;
+extern motor CRM;
+extern motor CLM;
+extern motor ConveyM;
+extern motor BrushM;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.

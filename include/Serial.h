@@ -25,18 +25,18 @@ private:
 
   template <typename T> void Add(T val) {
     ss << val;
-    if (printToBrain)
+    //if (printToBrain)
       Brain.Screen.print(val);
-    if (printToController && con)
-      con->Screen.print(val);
+    //if (printToController && con)
+     // con->Screen.print(val);
   }
   
   void NewLine() {
     ss << "\n";
-    if (printToBrain)
+   // if (printToBrain)
       Brain.Screen.newLine();
-    if (printToController && con)
-      con->Screen.newLine();
+    //if (printToController && con)
+   //   con->Screen.newLine();
   }
 
 public:
@@ -47,11 +47,11 @@ public:
 
   void Update() {
     unsigned long now = Brain.timer(msec);
-    if ( now-last > flushMillis) {
-      last = now;
-      std::cout << ss.str() << std::flush;
-      ss.str("");
-    }
+    // if ( now-last > flushMillis) {
+    //   last = now;
+    //   std::cout << ss.str() << std::flush;
+    //   ss.str("");
+    // }
   }
 
   //void operator<<(endl) = delete;

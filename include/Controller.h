@@ -8,8 +8,8 @@ private:
 public:
   constexpr Joy(const controller::axis *x, const controller::axis *y)
       : x(x), y(y) {}
-  signed char X() { return x->value(); }
-  signed char Y() { return y->value(); }
+  int8_t X() { return x->value(); }
+  int8_t Y() { return y->value(); }
 };
 
 class Pad {
