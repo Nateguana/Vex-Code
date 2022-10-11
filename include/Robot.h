@@ -2,16 +2,45 @@
 #include "vex.h"
 #include <algorithm>
 #include <cmath>
-#include <iostream>//33 - 38
+#include <iostream> //33 - 38
+enum Ball {
+  RED,
+  BLUE,
+  YELLOW,
+};
+static const char *BallColors[] = {"Red", "Blue", "Yellow"};
+
 static motor *Motors[5] = {&LBM, &RBM, &LFM, &RFM, &SM};
+static signature *Sigs[3] = {&Vision__RE, &Vision__BLU, &Vision__YELL};
+static code *Code = &Vision__YG;
 struct Turns {
   Turns(double turnBL, double turnBR, double turnFL, double turnFR,
-        double turnS) {
+        double turnS = 0) {
     turns[0] = turnBL;
     turns[1] = turnBR;
     turns[2] = turnFL;
     turns[3] = turnFR;
     turns[4] = turnS;
+  }
+  Turns &operator+=(const Turns &tick) {
+    for (int j = 0; j < 5; j++)
+      turns[j] += tick.turns[j];
+    return *this;
+  }
+  Turns &operator-=(const Turns &tick) {
+    for (int j = 0; j < 5; j++)
+      turns[j] -= tick.turns[j];
+    return *this;
+  }
+  Turns &operator*=(const Turns &tick) {
+    for (int j = 0; j < 5; j++)
+      turns[j] *= tick.turns[j];
+    return *this;
+  }
+  Turns &operator*=(const double &d) {
+    for (int j = 0; j < 5; j++)
+      turns[j] *= d;
+    return *this;
   }
   double turns[5];
 };
@@ -32,14 +61,14 @@ public:
   void TurnLeft(double angle, double velocity = 360, bool blocking = 1);
   void TurnRight(double angle, double velocity = 360, bool blocking = 1);
 
-  void Catch(bool blocking = 1);
-  void Uncatch(bool blocking = 1);
+  // void Catch(bool blocking = 1);
+  // void Uncatch(bool blocking = 1);
 
   // void TurnLeft1(double angle, double velocity = 360, bool blocking = 1);
   // void TurnRight1(double angle, double velocity = 360, bool blocking = 1);
 
- // void Control(double dist, double error, double velocity = 360);
-  void Control(Turns &turns); 
+  // void Control(double dist, double error, double velocity = 360);
+  void Control(Turns &turns);
   void Move(Turns &turns, double velocity, bool blocking);
 
   void WaitForPress() {

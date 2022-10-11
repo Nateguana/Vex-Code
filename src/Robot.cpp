@@ -38,16 +38,16 @@ void Robot::TurnRight(double angle, double velocity, bool blocking) {
   TurnLeft(-angle, velocity, blocking);
 }
 
-void Robot::Catch(bool blocking) {
+// void Robot::Catch(bool blocking) {
 
-  CRM.spin(forward, 360, rpm);
-  CLM.spin(forward, 360, rpm);
-}
+//   CRM.spin(forward, 360, rpm);
+//   CLM.spin(forward, 360, rpm);
+// }
 
-void Robot::Uncatch(bool blocking) {
-  CRM.spin(reverse, 360, rpm);
-  CLM.spin(reverse, 360, rpm);
-}
+// void Robot::Uncatch(bool blocking) {
+//   CRM.spin(reverse, 360, rpm);
+//   CLM.spin(reverse, 360, rpm);
+// }
 
 // void Robot::TurnLeft1(double angle, double velocity, bool blocking) {
 //   double turn = angle * tRatio * 2;

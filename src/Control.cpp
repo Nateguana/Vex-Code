@@ -84,6 +84,9 @@
 // }
 void Control::Teleop(double k, double velocity) {
   // Serial.Update();
+  bool prevBall=0;
+  int balls=0;
+  bool autoConvey=0;
   while (1) {
     int8_t forwardV = Controller::joys[0].Y();
     int8_t strafeV = Controller::joys[0].X();
@@ -96,10 +99,25 @@ void Control::Teleop(double k, double velocity) {
                 strafeV * velocity / 127);
     robot->Control(turns);
 
-    double ramp = (Controller::pads[1].Up() - Controller::pads[1].Down()) * 480;
-    double brush =
-        (Controller::pads[1].Left() - Controller::pads[1].Right()) * 480;
-    ConveyM.spin(forward,ramp,rpm);//spin(forward, ramp, rpm);
-    BrushM.spin(forward, brush, rpm);
+    // double ramp = (Controller::pads[1].Up() - Controller::pads[1].Down()) * 480;
+    bool brush =Controller::pads[1].Left();
+    int8_t ramp = Controller::joys[1].Y();
+    bool startBall=Controller::pads[1].Up();
+    bool cancel=Controller::pads[1].Down();
+    
+    bool currBall=BallBumper.pressing();
+
+    if(startBall)autoConvey=1;
+    if(ramp||cancel||currBall){
+      autoConvey=0;
+    }
+    ConveyM.spin(forward, (autoConvey+ramp/127.0)*480, rpm); 
+    BrushM.spin(forward, !!(autoConvey||brush)*480, rpm);
+
+    if(currBall&&!prevBall){
+      Serial<<"Ball "<<++balls<<std::endl;
+    }
+    prevBall=currBall;
+    Serial.Update();
   }
 }

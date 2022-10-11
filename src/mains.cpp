@@ -1,12 +1,13 @@
 #include "mains.h"
+#include "Auto.h"
 #include "Control.h"
 #include "Robot.h"
 #include "RobotTest.h"
 #include "SensorTest.h"
 #include "Serial.h"
 #include "vex.h"
+#include "Controller.h"
 #include <iostream>
-
 
 int mains(int version) {
   vexcodeInit();
@@ -15,29 +16,36 @@ int mains(int version) {
   Control con(&robot);
   // LeftM.setMaxTorque(10000, amp);
   // RightM.setMaxTorque(10000, amp);
-  Serial.SetController(&Controller1);
+  // Serial.SetController(&Controller1);
   // std::cout << "Robot Version " << version << std::endl;
   Serial << "Robot Version " << version << std::endl;
-  //Serial << "asd" << "asdf";// << std::endl;
-  //Serial << std::endl;
+  // Serial << "asd" << "asdf";// << std::endl;
+  // Serial << std::endl;
 
   // con.WallFollow(40,5,40*4,1/2.0,36as0);
   // con.LineFollow(150,5/1000.0,180);
-  //robot.Forward(100,360);
-  //robot.StrafeLeft(10,360);
-  //robot.StrafeRight(10,360);
-  //Turns turns(1*360*5,0,0,0,0);
-  //robot.Move(turns, 360, 1);
-  //robot.TurnLeft(360*4);
+  // robot.Forward(100,360);
+  // robot.StrafeLeft(10,360);
+  // robot.StrafeRight(10,360);
+  // Turns turns(1*360*5,0,0,0,0);
+  // robot.Move(turns, 360, 1);
+  // robot.TurnLeft(360*4);
   // robot.Catch();
   // robot.WaitForPress();
   // robot.Uncatch();
-  //Motors[0]->spin(forward,-100,rpm);
- con.Teleop(0,180);
- //Turns turns (-100,-100,-100,-100,0);
- //robot.Control(turns);
+  // Motors[0]->spin(forward,-100,rpm);
+  // con.Teleop(0,180);
+  // SensorTest::PrintBumber(BallBumper);
+  // Turns turns (-100,-100,-100,-100,0);
+  // robot.Control(turns);
   // SensorTest::DetectObject(Vision,Vision__BLU);
-  //con.VisionStandoff(Vision__RE, 4 / 100.0, 5 / 1000.0, 180);
-  //con.Teleop();
+  // con.VisionStandoff(Vision__RE, 4 / 100.0, 5 / 1000.0, 180);
+  // con.Teleop();
+  //SensorTest::PrintLine(LineR);
+  Auto au(&robot);
+  while (!Controller::pads[0].Down()) {
+    au.Tick();
+  }
+  con.Teleop(0,180);
   return 0;
 }

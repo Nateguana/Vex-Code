@@ -27,7 +27,7 @@ public:
 
   static void PrintLine(line& l, unsigned num = ~0) {
     for (unsigned j = 0; j < num; j++) {
-      PrintAndWait(l.value(range8bit));
+      PrintAndWait(l.value(range12bit));
     }
   }
   

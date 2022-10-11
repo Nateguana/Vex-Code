@@ -47,11 +47,11 @@ public:
 
   void Update() {
     unsigned long now = Brain.timer(msec);
-    // if ( now-last > flushMillis) {
-    //   last = now;
-    //   std::cout << ss.str() << std::flush;
-    //   ss.str("");
-    // }
+    if ( now-last > flushMillis) {
+      last = now;
+      std::cout << ss.str() << std::flush;
+      ss.str("");
+    }
   }
 
   //void operator<<(endl) = delete;
