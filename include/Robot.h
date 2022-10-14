@@ -2,17 +2,26 @@
 #include "vex.h"
 #include <algorithm>
 #include <cmath>
-#include <iostream> //33 - 38
+#include <iostream>
+
+// global constants
 enum Ball {
   RED,
   BLUE,
   YELLOW,
 };
+
 static const char *BallColors[] = {"Red", "Blue", "Yellow"};
 
 static motor *Motors[5] = {&LBM, &RBM, &LFM, &RFM, &SM};
 static signature *Sigs[3] = {&Vision__RE, &Vision__BLU, &Vision__YELL};
 static code *Code = &Vision__YG;
+
+/**
+  A struct used for Robot::Move() and Robot::Control()
+  Holds an array of length 5, one for each of the 4 actual motors
+  and 1 for the center wheel (Side wheel) which never was connected to the robot.
+*/
 struct Turns {
   Turns(double turnBL, double turnBR, double turnFL, double turnFR,
         double turnS = 0) {
@@ -44,37 +53,66 @@ struct Turns {
   }
   double turns[5];
 };
+
+/**
+  A class which abstacts the robot motors
+*/
 class Robot {
   double track = 0;
   double gRatio = 0;
   double tRatio = 0;
 
 public:
+  /**
+    The contructor with robot dimensions
+  */
   Robot(double diameter = 10.5, double trackLength = 35, double gearRatio = 5);
 
+  /**
+    Move robot forward a distance in cm at a certain robot velocity with optional blocking
+  */
   void Forward(double dist, double velocity = 360, bool blocking = 1);
+
+  /**
+    Stop all robot motors
+  */
   void Stop();
 
-  void StrafeLeft(double dist, double velocity = 360, bool blocking = 1);
-  void StrafeRight(double dist, double velocity = 360, bool blocking = 1);
+  /**
+    If the center wheel existed this would move the robot left a distance in cm at a certain velocity with optional blocking
+  */
+  [[deprecated]] void StrafeLeft(double dist, double velocity = 360, bool blocking = 1);
 
+  /**
+    If the center wheel existed this would move the robot right a distance in cm at a certain velocity with optional blocking
+  */
+  [[deprecated]] void StrafeRight(double dist, double velocity = 360, bool blocking = 1);
+
+  /**
+    Turns the robot left by an angle in degrees at a certain velocity with optional blocking
+  */
   void TurnLeft(double angle, double velocity = 360, bool blocking = 1);
+
+  /**
+    Turns the robot right by an angle in degrees at a certain velocity with optional blocking
+  */
   void TurnRight(double angle, double velocity = 360, bool blocking = 1);
 
-  // void Catch(bool blocking = 1);
-  // void Uncatch(bool blocking = 1);
-
-  // void TurnLeft1(double angle, double velocity = 360, bool blocking = 1);
-  // void TurnRight1(double angle, double velocity = 360, bool blocking = 1);
-
-  // void Control(double dist, double error, double velocity = 360);
+  /**
+    Set the rpm for all motors with a turns refrence
+  */
   void Control(Turns &turns);
+
+  /**
+    Sets the distance each motor should move in degrees
+    If the distance of a motor is 0 it is stopped
+    The motors speeds are set so motors stop turning at the same time
+  */
   void Move(Turns &turns, double velocity, bool blocking);
 
-  void WaitForPress() {
-    while (!Bumper.pressing()) {
-      vex::task::sleep(10);
-    }
-    vex::task::sleep(500);
-  }
+
+  /**
+    Blocks until the button is pressed
+  */
+  void WaitForPress();
 };

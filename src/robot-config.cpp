@@ -22,7 +22,7 @@ code Vision__YG = code (Vision__YELL, Vision__BLU );
 vision Vision = vision (PORT2, 50, Vision__YELL, Vision__BLU, Vision__RE);
 /*vex-vision-config:end*/
 controller Controller1 = controller(primary);
-motor RFM = motor(PORT10, ratio18_1, false);
+motor RFM = motor(PORT3, ratio18_1, false);
 motor LFM = motor(PORT1, ratio18_1, true);
 digital_out DigitalOutH = digital_out(Brain.ThreeWirePort.H);
 motor SM = motor(PORT5, ratio18_1, false);

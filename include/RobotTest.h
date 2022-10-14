@@ -4,6 +4,9 @@
 #include <cmath>
 #include <iostream>
 
+/**
+  A class for lab 1
+*/
 class RobotTest {
  Robot *robot;
 

@@ -91,32 +91,27 @@ void Robot::Stop() {
 }
 
 void Robot::Control(Turns &turns) {
-   for (unsigned char j = 0; j < 5; j++) {
-    Motors[j]->spin(forward,turns.turns[j],rpm);
+  for (unsigned char j = 0; j < 5; j++) {
+    Motors[j]->spin(forward, turns.turns[j], rpm);
   }
 }
 
 void Robot::Move(Turns &turns, double velocity, bool blocking) {
-  double maxTurn = fabs(turns.turns[0]);
-  for (unsigned char j = 0; j < 5; j++)
-    std::cout << "Turn[" << (int)j << "] = " << turns.turns[j] << std::endl;
+  //find max distance
+  // for (unsigned char j = 0; j < 5; j++)
+  //   std::cout << "Turn[" << (int)j << "] = " << turns.turns[j] << std::endl;
 
+
+  //find max distance
+  double maxTurn = fabs(turns.turns[0]);
   for (unsigned char j = 1; j < 5; j++) {
     maxTurn = fmax(maxTurn, fabs(turns.turns[j]));
   }
   double vel = velocity / maxTurn;
-  std::cout << "vel:" << vel << " maxTurn:" << maxTurn << std::endl;
-  // print
-  // std::cout << "Left: " << turnL << " at " << lVel << " "
-  //           << (lBlock ? "" : "non-") << "blocking " << std::endl;
-  // std::cout << "Right: " << turnR << " at " << rVel << " "
-  //           << (rBlock ? "" : "non-") << "blocking " << std::endl;
 
-  // /bool  = turnBL || turnBR || turnFL || turnFR;
+//find last motor that is spinning
   char blockIndex = 4;
-  for (; blockIndex >= 0 && !turns.turns[(unsigned)blockIndex]; blockIndex--)
-    ;
-  std::cout << "block:" << (int)blockIndex << std::endl;
+  for (; blockIndex >= 0 && !turns.turns[(unsigned)blockIndex]; blockIndex--);
 
   // spin
   for (unsigned char j = 0; j < 5; j++) {
@@ -127,46 +122,9 @@ void Robot::Move(Turns &turns, double velocity, bool blocking) {
   }
 }
 
-// void Robot::Move(double turnL, double turnR, double velocity, bool
-// blocking)
-// {
-//   double lVel = velocity;
-//   double rVel = lVel;
-//   double percent = fabs(turnL / turnR);
-//   bool lBlock = 0;
-//   bool rBlock = blocking;
-
-//   // if Right wheel does not turn then block left;
-//   if (!turnR) {
-//     lBlock = blocking;
-//     rBlock = 0;
-//   }
-
-//   // make percent less than 1
-//   if (percent > 1)
-//     percent = 1 / percent;
-//   if (std::isnan(percent));
-//   else if (turnR > turnL) {
-//     lVel *= percent;
-//   } else {
-//     rVel *= percent;
-//   }
-
-//   // print
-//   std::cout << "Left: " << turnL << " at " << lVel << " "
-//             << (lBlock ? "" : "non-") << "blocking " << std::endl;
-//   std::cout << "Right: " << turnR << " at " << rVel << " "
-//             << (rBlock ? "" : "non-") << "blocking " << std::endl;
-
-//   // spin
-//   LeftM.spinFor(turnL, deg, lVel, dps, lBlock);
-//   RightM.spinFor(turnR, deg, rVel, dps, rBlock);
-
-//   // stop motors cause vex stuupid
-//   if (!turnL) {
-//     LeftM.stop();
-//   }
-//   if (!turnR) {
-//     RightM.stop();
-//   }
-// }
+void Robot::WaitForPress() {
+  while (!Bumper.pressing()) {
+    vex::task::sleep(10);
+  }
+  vex::task::sleep(500);
+}

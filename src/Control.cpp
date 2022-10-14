@@ -82,6 +82,7 @@
 //     vex::task::sleep(100);
 //   }
 // }
+
 void Control::Teleop(double k, double velocity) {
   // Serial.Update();
   bool prevBall=0;
@@ -111,7 +112,7 @@ void Control::Teleop(double k, double velocity) {
     if(ramp||cancel||currBall){
       autoConvey=0;
     }
-    ConveyM.spin(forward, (autoConvey+ramp/127.0)*480, rpm); 
+    ConveyM.spin(forward, (autoConvey+ramp/127.0)*240, rpm); 
     BrushM.spin(forward, !!(autoConvey||brush)*480, rpm);
 
     if(currBall&&!prevBall){

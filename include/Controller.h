@@ -1,5 +1,8 @@
 #include "vex.h"
 
+/**
+  Abstract joysticks
+*/
 class Joy {
 private:
   const controller::axis *x;
@@ -12,6 +15,9 @@ public:
   int8_t Y() { return y->value(); }
 };
 
+/**
+  Abstract Dpads
+*/
 class Pad {
 private:
   const controller::button *up;
@@ -29,6 +35,9 @@ public:
   bool Right() { return right->pressing(); }
 };
 
+/**
+  Abstract Trigger buttons
+*/
 class Trig {
 private:
   const controller::button *near;
@@ -41,6 +50,11 @@ public:
   bool Far() { return far->pressing(); }
 };
 
+/**
+  Abstract Controllers
+  thing[0] is the left one
+  thing[1] is on the right
+*/
 class Controller {
 private:
 public:
